@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ServidorRestAPI<servidorREST>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.RestAPI.API.ServidorRestAPI",
+            "projectName": "servidorREST",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
