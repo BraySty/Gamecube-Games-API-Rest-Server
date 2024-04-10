@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ServidorRestAPI",
+            "request": "launch",
+            "mainClass": "com.restapi.api.ServidorRestAPI",
+            "projectName": "servidorREST"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ServidorRestAPI<servidorREST>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

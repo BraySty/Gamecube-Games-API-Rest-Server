@@ -29,27 +29,27 @@ public class JuegoService {
     }
 
     public List<Juego> readAllByTitleOrDeveloper(String title, String developer) {
-        if (developer == null && title == null) {												// http://localhost:8088/api/v1/gamecube/juegos
+        if (developer == null && title == null) {
 			return repo.findAll();
-		} else if (title != null) { 															// http://localhost:8088/api/v1/gamecube/juegos?title=NINTENDO
+		} else if (title != null) {
 			return repo.findByTitleContaining(title);
-		} else { 																				// http://localhost:8088/api/v1/gamecube/juegos?developer=NINTENDO
+		} else { 
 			return repo.findByDeveloperContaining(developer);
 		}
     }
 
     public ResponseEntity<?> readByTitleOrDeveloper(String title, String developer) {
-        if (developer == null && title == null) {												// http://localhost:8088/api/v1/gamecube/juego
+        if (developer == null && title == null) {											
 			return new ResponseEntity<>(new Mensaje("No se han presentado parametros."), HttpStatus.NO_CONTENT);
-		} else if (title != null) { 															// http://localhost:8088/api/v1/gamecube/juego?title=NINTENDO
-			Optional<Juego> posibleJuego = repo.findByTitle(title);
+		} else if (title != null) { 
+			Optional<Juego> posibleJuego = repo.findFirstByTitleLike(title);
 			if (posibleJuego.isPresent()) {
 				return new ResponseEntity<>(posibleJuego.get(), HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(new Mensaje("El juego con titulo " + title + " no existe."), HttpStatus.NOT_FOUND);
 			}
-		} else { 																				// http://localhost:8088/api/v1/gamecube/juego?developer=NINTENDO
-			Optional<Juego> posibleJuego =  repo.findByDeveloper(developer);
+		} else {
+			Optional<Juego> posibleJuego =  repo.findFirstByDeveloperLike(developer);
 			if (posibleJuego.isPresent()) {
 				return new ResponseEntity<>(posibleJuego.get(), HttpStatus.OK);
 			} else {

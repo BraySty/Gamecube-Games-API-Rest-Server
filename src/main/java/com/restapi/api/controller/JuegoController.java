@@ -25,37 +25,31 @@ public class JuegoController {
 
 	private final JuegoService juegoService;
 
-	// http://localhost:8088/api/v1/gamecube/juego
 	@PostMapping("/gamecube/juegos/juego")
 	ResponseEntity<Mensaje> insertarProducto(@RequestBody Juego juego) {
 		return juegoService.save(juego);
 	}
-	
-	// http://localhost:8088/api/v1/gamecube/juegos?developer=NINTENDO
+
 	@GetMapping("/gamecube/juegos") 
 	List<Juego> getAllJuegos(@RequestParam(required = false) String developer, @RequestParam(required = false) String title){
 		return juegoService.readAllByTitleOrDeveloper(title, developer);
 	}
 
-	// http://localhost:8088/api/v1/gamecube/juego?developer=NINTENDO
 	@GetMapping("/gamecube/juegos/juego")
 	ResponseEntity<?> getJuego(@RequestParam(required = false) String developer,@RequestParam(required = false) String title){
 		return juegoService.readByTitleOrDeveloper(title, developer);
 	}
-	
-	// http://localhost:8088/api/v1/gamecube/juegos/1
+
 	@GetMapping("/gamecube/juegos/juego/{id}")
 	ResponseEntity<?> getJuego(@PathVariable("id") Integer idJuego) {
 		return juegoService.readByID(idJuego);
 	}
 
-	// http://localhost:8088/api/v1/gamecube/juego
 	@PutMapping("/gamecube/juegos/juego/{id}")
 	ResponseEntity<Mensaje> actualizarJuego(@PathVariable("id") Integer idJuego, @RequestBody Juego juego) {
 		return juegoService.updateByID(idJuego, juego);
 	}
 
-	// http://localhost:8088/api/v1/gamecube/juegos/1
 	@DeleteMapping("/gamecube/juegos/juego/{id}") 
 	ResponseEntity<Mensaje> borrarJuego(@PathVariable("id") Integer idJuego) {
 		return juegoService.deleteByID(idJuego);
